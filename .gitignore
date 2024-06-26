@@ -1,3 +1,4 @@
 # Ignore secrets
 secrets/secret*
 data/*
+models/*
