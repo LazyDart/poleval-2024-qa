@@ -1,4 +1,9 @@
 # Ignore secrets
 secrets/secret*
+
+# Ignore data and models
 data/*
 models/*
+
+# Ignore __pycache__
+__pycache__/
