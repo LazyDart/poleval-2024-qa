@@ -19,12 +19,26 @@ def download_plt5(large=False, colab=False):
         os.makedirs(model_folder)
 
     # Load T5 Model
-    tokenizer = T5Tokenizer.from_pretrained(f'allegro/plt5-{kind}')
+    tokenizer = T5Tokenizer.from_pretrained(f'allegro/plt5-{kind}', legacy=False)
     model = T5ForConditionalGeneration.from_pretrained(f'allegro/plt5-{kind}')
 
     # Save Model
     tokenizer.save_pretrained(model_folder)
     model.save_pretrained(model_folder)
+
+
+def load_plt5(large=False, colab=False):
+
+    kind = "large" if large else "base"
+    root = "../" if not colab else "./poleval-2024-qa/"
+
+    model_folder = os.path.join(root, f'models/plt5-original-{kind}')
+
+    # Load T5 Model
+    tokenizer = T5Tokenizer.from_pretrained(model_folder)
+    model = T5ForConditionalGeneration.from_pretrained(model_folder)
+
+    return tokenizer, model
 
 
 if __name__ == "__main__":
@@ -43,4 +57,4 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    download_plt5(args.base, args.colab)
+    download_plt5(args.large, args.colab)
