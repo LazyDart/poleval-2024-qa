@@ -27,12 +27,12 @@ def download_plt5(large=False, colab=False):
     model.save_pretrained(model_folder)
 
 
-def load_plt5(large=False, colab=False):
+def load_plt5(model_path, large=False, colab=False):
 
     kind = "large" if large else "base"
     root = "../" if not colab else "./poleval-2024-qa/"
 
-    model_folder = os.path.join(root, f'models/plt5-original-{kind}')
+    model_folder = os.path.join(root, "models/", model_path)
 
     # Load T5 Model
     tokenizer = T5Tokenizer.from_pretrained(model_folder)
