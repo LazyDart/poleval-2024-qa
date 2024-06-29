@@ -7,6 +7,8 @@ from transformers import T5Tokenizer, T5ForConditionalGeneration
 from argparse import ArgumentParser
 
 
+UNANSWERABLE_TOKEN = "[BRAK_ODPOWIEDZI]"
+
 def download_plt5(large=False, colab=False):
 
     kind = "large" if large else "base"
@@ -21,15 +23,18 @@ def download_plt5(large=False, colab=False):
     # Load T5 Model
     tokenizer = T5Tokenizer.from_pretrained(f'allegro/plt5-{kind}', legacy=False)
     model = T5ForConditionalGeneration.from_pretrained(f'allegro/plt5-{kind}')
+    
+    # Add the special token to the tokenizer
+    tokenizer.add_tokens([UNANSWERABLE_TOKEN])
+    model.resize_token_embeddings(len(tokenizer))
 
     # Save Model
     tokenizer.save_pretrained(model_folder)
     model.save_pretrained(model_folder)
 
 
-def load_plt5(model_path, large=False, colab=False):
+def load_plt5(model_path, colab=False):
 
-    kind = "large" if large else "base"
     root = "../" if not colab else "./poleval-2024-qa/"
 
     model_folder = os.path.join(root, "models/", model_path)
