@@ -84,7 +84,7 @@ def dataset_into_str_input(df):
     return (
         df["title"].apply(lambda x: "kontekst: " + x + "  ")
         + df["context"].apply(lambda x: x + "  ")
-        + df["question"].apply(lambda x: "pytanie: " + x + " </s>")
+        + df["question"].apply(lambda x: "pytanie: " + x)
          )
 
 
