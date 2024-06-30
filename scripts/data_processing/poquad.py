@@ -82,9 +82,9 @@ def load_poquad_manually_downloaded(dirpath):
 def dataset_into_str_input(df):
 
     return (
-        df["title"].apply(lambda x: "tytuł: " + x + " ")
-        + df["context"].apply(lambda x: "kontekst: " + x + " ")
-        + df["question"].apply(lambda x: "pytanie: " + x)
+        df["title"].apply(lambda x: "kontekst: " + x + "  ")
+        + df["context"].apply(lambda x: x + "  ")
+        + df["question"].apply(lambda x: "pytanie: " + x + " </s>")
          )
 
 
