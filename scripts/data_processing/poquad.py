@@ -80,12 +80,19 @@ def load_poquad_manually_downloaded(dirpath):
     return train, valid
 
 def dataset_into_str_input(df):
+    df = df.copy()
 
-    return (
-        df["title"].apply(lambda x: "kontekst: " + x + "  ")
-        + df["context"].apply(lambda x: x + "  ")
-        + df["question"].apply(lambda x: "pytanie: " + x)
-         )
+    input_data = (df["title"].apply(lambda x: "kontekst: " + x + "  ")
+                    + df["context"].apply(lambda x: x + "  ")
+                    + df["question"].apply(lambda x: "pytanie: " + x)).rename("input_text")
+    
+    df["target"] = df["answers"].apply(lambda x: x["text"][0])
+
+    df.loc[df["is_impossible"] == True, "target"] = "[BRAK_ODPOWIEDZI]"
+
+    target = df["target"].apply(lambda x: "odpowiedź: " + x).rename("target_text")
+
+    return pd.concat([input_data, target], axis=1)
 
 
 # download_poquad(data_dir = '../data/poquad-original/')    
