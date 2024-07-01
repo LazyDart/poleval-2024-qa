@@ -31,8 +31,8 @@ class TextDataset(Dataset):
         return len(self.data)
 
     def __getitem__(self, index):
-        input_text = str(self.input_text.loc[index])
-        target_text = str(self.target_text.loc[index])
+        input_text = self.input_text.loc[index]
+        target_text = self.target_text.loc[index]
 
         inputs = self.tokenizer.encode_plus(
             input_text,
@@ -60,19 +60,17 @@ class TextDataset(Dataset):
         }
     
 
-def create_data_loader(dataframe, tokenizer, max_len, batch_size):
-    ds = TextDataset(
-        dataframe=dataframe,
-        tokenizer=tokenizer,
-        max_len=max_len
-    )
-    return DataLoader(
-        ds,
-        batch_size=batch_size,
-        num_workers=4
-    )
-    
-
+# def create_data_loader(dataframe, tokenizer, max_len, batch_size):
+#     ds = TextDataset(
+#         dataframe=dataframe,
+#         tokenizer=tokenizer,
+#         max_len=max_len
+#     )
+#     return DataLoader(
+#         ds,
+#         batch_size=batch_size,
+#         num_workers=4
+#     )
 
 # Example usage:
 # df = pd.read_csv('path_to_your_csv.csv')
