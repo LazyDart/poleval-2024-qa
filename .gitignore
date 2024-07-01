@@ -7,3 +7,5 @@ models/*
 
 # Ignore __pycache__
 __pycache__/
+
+wandb/
