@@ -30,6 +30,7 @@ def load_poquad_datasets(data_dir):
     
     return train_dataset, validation_dataset
 
+
 def read_poquad_manually_downloaded(filepath):
         whole_data = []
         with open(filepath, encoding="utf-8") as f:
@@ -42,11 +43,9 @@ def read_poquad_manually_downloaded(filepath):
                     for qa in paragraph["qas"]:
                         question = qa["question"]
                         
-                        if "answers" not in qa:
-                            continue
-                        answer_starts = [answer["answer_start"] for answer in qa["answers"]]
+                        answer_starts = [answer["answer_start"] for answer in qa["answers"]] if "answers" in qa else []
 
-                        answers = [answer["text"] for answer in qa["answers"]]
+                        answers = [answer["text"] for answer in qa["answers"]] if "answers" in qa else []
                         is_impossible = qa["is_impossible"]
 
                         id_ += 1
@@ -86,9 +85,7 @@ def dataset_into_str_input(df):
                     + df["context"].apply(lambda x: x + "  ")
                     + df["question"].apply(lambda x: "pytanie: " + x)).rename("input_text")
     
-    df["target"] = df["answers"].apply(lambda x: x["text"][0])
-
-    df.loc[df["is_impossible"] == True, "target"] = "[BRAK_ODPOWIEDZI]"
+    df["target"] = df["answers"].apply(lambda x: x["text"][0] if len(x["text"]) > 0 else "[BRAK_ODPOWIEDZI]")
 
     target = df["target"].apply(lambda x: "odpowiedź: " + x).rename("target_text")
 
