@@ -9,9 +9,8 @@ from argparse import ArgumentParser
 
 UNANSWERABLE_TOKEN = "[BRAK_ODPOWIEDZI]"
 
-def download_plt5(large=False, colab=False):
+def download_plt5(kind="base", colab=False):
 
-    kind = "large" if large else "base"
     root = "../" if not colab else "./poleval-2024-qa/"
 
     model_folder = os.path.join(root, f'models/plt5-original-{kind}')
@@ -57,9 +56,10 @@ if __name__ == "__main__":
     # !python ./poleval-2024-qa/scripts/load_t5.py --colab
 
     parser = ArgumentParser()
-    parser.add_argument("--large", action="store_true", help="Download base model")
+    parser.add_argument("--kind", default="base", help="Which kind of model to download")
+    # parser.add_argument("--kind", action="store_true", help="Which kind of model to download")
     parser.add_argument("--colab", action="store_true", help="Running on Colab")
 
     args = parser.parse_args()
 
-    download_plt5(args.large, args.colab)
+    download_plt5(args.kind, args.colab)
