@@ -92,7 +92,7 @@ def dataset_into_str_input(df):
 
     target = df["target"].apply(lambda x: "odpowiedź: " + x).rename("target_text")
 
-    return pd.concat([input_data, target], axis=1)
+    return pd.concat([input_data, target], axis=1).reset_index(drop=True)
 
 
 # download_poquad(data_dir = '../data/poquad-original/')    
