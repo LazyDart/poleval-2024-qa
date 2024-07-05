@@ -18,47 +18,45 @@ def convert_to_features(tokenizer, example_batch):
     return encodings
 
 
+
 class TextDataset(Dataset):
-    def __init__(self, dataframe, tokenizer, max_len_input, max_len_target):
+    def __init__(self, data, tokenizer, max_length_input, max_length_label):
+        self.inputs = data["input_text"]
+        self.labels = data["target_text"]
         self.tokenizer = tokenizer
-        self.data = dataframe
-        self.input_text = dataframe['input_text']
-        self.target_text = dataframe['target_text']
-        self.max_len_input = max_len_input
-        self.max_len_target = max_len_target
+        self.max_length_input = max_length_input
+        self.max_length_label = max_length_label
 
     def __len__(self):
-        return len(self.data)
+        return len(self.inputs)
 
-    def __getitem__(self, index):
-        input_text = self.input_text.loc[index]
-        target_text = self.target_text.loc[index]
-
-        inputs = self.tokenizer.encode_plus(
-            input_text,
-            add_special_tokens=True,
-            max_length=self.max_len_input,
-            padding='max_length',
-            return_attention_mask=True,
-            truncation=True
+    def __getitem__(self, idx):
+        input_text = self.inputs.iloc[idx]
+        label_text = self.labels.iloc[idx]
+        
+        input_encoding = self.tokenizer(
+            input_text, 
+            max_length=self.max_length_input, 
+            padding='max_length', 
+            truncation=True,
+            return_tensors="pt"
         )
         
-        targets = self.tokenizer.encode_plus(
-            target_text,
-            add_special_tokens=True,
-            max_length=self.max_len_target,
-            padding='max_length',
-            return_attention_mask=True,
-            truncation=True
+        label_encoding = self.tokenizer(
+            label_text, 
+            max_length=self.max_length_label, 
+            padding='max_length', 
+            truncation=True,
+            return_tensors="pt"
         )
         
-        return {
-            'input_ids': inputs['input_ids'],
-            'attention_mask': inputs['attention_mask'],
-            'labels': targets['input_ids'],
-            'decoder_attention_mask': targets['attention_mask']
+        item = {
+            'input_ids': input_encoding['input_ids'].squeeze(),
+            'attention_mask': input_encoding['attention_mask'].squeeze(),
+            'labels': label_encoding['input_ids'].squeeze()  # Labels typically don't have attention_mask
         }
-    
+        return item
+
 
 # def create_data_loader(dataframe, tokenizer, max_len, batch_size):
 #     ds = TextDataset(
