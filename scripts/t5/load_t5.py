@@ -53,7 +53,7 @@ if __name__ == "__main__":
     # python load_t5.py
 
     # On Colab
-    # !python ./poleval-2024-qa/scripts/load_t5.py --colab
+    # !python ./poleval-2024-qa/scripts/t5/load_t5.py --colab
 
     parser = ArgumentParser()
     parser.add_argument("--kind", default="base", help="Which kind of model to download")
