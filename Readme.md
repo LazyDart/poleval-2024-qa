@@ -41,3 +41,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Future Updates
 
 This README will be updated regularly as the project progresses and more details become available.
+
+## PLT5 Model from:
+https://huggingface.co/allegro/plt5-base
+Chrabrowa, A., Dragan, Ł., Grzegorczyk, K., Kajtoch, D., Koszowski, M., Mroczkowski, R., & Rybak, P. (2022). Evaluation of transfer learning for Polish with a text-to-text model. arXiv preprint arXiv:2205.08808.
