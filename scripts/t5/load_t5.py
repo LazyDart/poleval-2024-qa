@@ -11,6 +11,9 @@ UNANSWERABLE_TOKEN = "[BRAK_ODPOWIEDZI]"
 
 def download_plt5(kind="base", colab=False):
 
+    if kind not in ["small", "base", "large"]:
+        raise ValueError("Invalid kind of model")
+
     root = "../" if not colab else "./poleval-2024-qa/"
 
     model_folder = os.path.join(root, f'models/plt5-original-{kind}')
