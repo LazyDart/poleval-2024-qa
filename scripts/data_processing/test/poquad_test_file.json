@@ -1,0 +1,42 @@
+{
+    "version": "02-20",
+    "data": [
+      {
+        "id": 7609,
+        "title": "Jan Paweł II",
+        "summary": "Jan Paweł II (łac. Ioannes Paulus PP. II, wł. Giovanni Paolo II, właśc. Karol Józef Wojtyła; ur. 18 maja 1920 w Wadowicach, zm. 2 kwietnia 2005 w Watykanie) – polski duchowny rzymskokatolicki, biskup pomocniczy krakowski (1958–1964), arcybiskup metropolita krakowski (1964–1978), kardynał prezbiter (1967–1978), zastępca Przewodniczącego Konferencji Episkopatu Polski (1969–1978), 264. papież i 6. Suweren Państwa Watykańskiego w latach 1978–2005. Święty Kościoła katolickiego. Pierwszy w III RP kawaler Orderu Orła Białego, poeta, poliglota, a także aktor niezawodowy, dramaturg, pedagog, filozof historii, fenomenolog, mistyk i przedstawiciel personalizmu chrześcijańskiego. ",
+        "url": "https://pl.wikipedia.org/wiki/Jan_Pawe%C5%82_II",
+        "paragraphs": [
+          {
+            "context": "W odpowiedzi na szeroko rozpowszechniony kult Jana Pawła II, po jego śmierci rozpowszechnił się fenomen internetowy polegający na tworzeniu memów nazywanych cenzopapami; cechują je: obrażanie papieża; wyśmiewanie jego przesadnego uwielbienia.",
+            "qas": [
+              {
+                "question": "Co było powodem fali popularności cenzopap?",
+                "answers": [
+                  {
+                    "text": "szeroko rozpowszechniony kult Jana Pawła II",
+                    "answer_start": 16,
+                    "answer_end": 59,
+                    "generative_answer": "szeroko rozpowszechniony kult Jana Pawła II"
+                  }
+                ],
+                "is_impossible": false
+              },
+              {
+                "question": "Co doprowadziło do kultu Jana Pawła II?",
+                "plausible_answers": [
+                    {
+                        "text": "tworzenie memów nazywanych cenzopapami",
+                        "answer_start": 114,
+                        "answer_end": 152,
+                        "generative_answer": "tworzenie memów nazywanych cenzopapami"
+                    }
+                ],
+                "is_impossible": true
+              }
+            ]
+          }
+        ]
+      }
+    ]
+}

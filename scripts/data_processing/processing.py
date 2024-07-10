@@ -56,28 +56,3 @@ class TextDataset(Dataset):
             'labels': label_encoding['input_ids'].squeeze()  # Labels typically don't have attention_mask
         }
         return item
-
-
-# def create_data_loader(dataframe, tokenizer, max_len, batch_size):
-#     ds = TextDataset(
-#         dataframe=dataframe,
-#         tokenizer=tokenizer,
-#         max_len=max_len
-#     )
-#     return DataLoader(
-#         ds,
-#         batch_size=batch_size,
-#         num_workers=4
-#     )
-
-# Example usage:
-# df = pd.read_csv('path_to_your_csv.csv')
-# dataloader = load_data(df)
-
-# Iterate through the DataLoader
-# for batch in dataloader:
-#     input_ids = batch['input_ids']
-#     attention_mask = batch['attention_mask']
-#     target_ids = batch['target_ids']
-#     target_attention_mask = batch['target_attention_mask']
-#     # Your training code here
