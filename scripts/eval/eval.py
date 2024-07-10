@@ -1,5 +1,9 @@
 import pandas as pd
+
+from Levenshtein import distance
+
 import re
+
 
 def bin_f1_score(df):
     tp = (df["is_impossible"] & df["gen_text"].str.contains(r"\[BRAK\_ODPOWIEDZI\]")).sum()
@@ -11,6 +15,10 @@ def bin_f1_score(df):
 
     return 2 * (precision * recall) / (precision + recall)
 
-def rm_answer_prefix(text):
 
+def rm_answer_prefix(text):
     return re.sub(r"odpowiedź: ", "", text)
+
+
+def normalized_levenshtein(text1, text2, *args, **kwargs):
+    return distance(text1, text2, *args, **kwargs)/(len(text1) + len(text2))
