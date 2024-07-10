@@ -9,3 +9,9 @@ models/*
 __pycache__/
 
 wandb/
+
+# Ignore checkpoints
+checkpoint*/
+
+# Ignore eval outputs
+*_eval_*.json
