@@ -10,10 +10,10 @@ def bin_f1_score(df):
     fp = ((~df["is_impossible"]) & df["gen_text"].str.contains(r"\[BRAK\_ODPOWIEDZI\]")).sum()
     fn = (df["is_impossible"] & ~df["gen_text"].str.contains(r"\[BRAK\_ODPOWIEDZI\]")).sum()
 
-    precision = tp / (tp + fp)
-    recall = tp / (tp + fn)
+    precision = tp / (tp + fp) if (tp + fp) > 0 else 0
+    recall = tp / (tp + fn) if (tp + fn) > 0 else 0
 
-    return 2 * (precision * recall) / (precision + recall)
+    return 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
 
 
 def rm_answer_prefix(text):
@@ -21,4 +21,7 @@ def rm_answer_prefix(text):
 
 
 def normalized_levenshtein(text1, text2, *args, **kwargs):
-    return distance(text1, text2, *args, **kwargs)/(len(text1) + len(text2))
+    if len(text1) + len(text2) != 0:
+        return distance(text1, text2, *args, **kwargs)/(len(text1) + len(text2))
+    else:
+        return 0
