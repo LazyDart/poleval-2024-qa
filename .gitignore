@@ -15,3 +15,5 @@ checkpoint*/
 
 # Ignore eval outputs
 *_eval_*.json
+
+*.egg-info/
