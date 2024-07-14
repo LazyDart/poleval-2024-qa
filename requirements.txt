@@ -7,3 +7,4 @@ numpy==1.26.4
 scikit-learn==1.4.2
 python-Levenshtein==0.25.1
 pytest==8.2.2
+accelerate==0.31.0
